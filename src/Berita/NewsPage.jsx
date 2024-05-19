@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const NewsPage = () => {
   const [news, setNews] = useState([]);
@@ -34,7 +35,7 @@ const NewsPage = () => {
 
   return (
     <div className="p-4 min-h-screen">
-      <a href="/news" className="absolute left-0 text-gray text-xl font-bold hover:text-white transition-colors duration-300 p-4">Back</a>
+      <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-white transition-colors duration-300 p-4">Back</Link>
       <h1 className="text-3xl font-bold text-center mb-8">Berita Papua</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {news.map((article, index) => (

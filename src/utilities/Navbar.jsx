@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Disclosure } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'News', href: '/news', current: false },
-  { name: 'Game', href: '/Trivia', current: false },
-  { name: 'Team', href: '/Us', current: false },
+  { name: 'Home', href: '/' },
+  { name: 'News', href: '/news' },
+  { name: 'Game', href: '/Trivia' },
+  { name: 'Team', href: '/Us' },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
-  const [loggedIn, setLoggedIn] = useState(false); 
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <Disclosure as="nav" className="bg-costumBlack">
@@ -40,28 +39,28 @@ export default function Example() {
                   <img
                     className="h-8 w-auto"
                     src="./Gambar/logor.png"
-                    alt="Yahuda papua"
+                    alt="Yahuda Papua"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'text-gray-300 hover:bg-gray-700 hover:text-white',
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
-                        aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                {/* Additional content like user profile can go here */}
               </div>
             </div>
           </div>
@@ -71,13 +70,12 @@ export default function Example() {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
-                  href={item.href}
+                  as={Link}
+                  to={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'block rounded-md px-3 py-2 text-base font-medium'
                   )}
-                  aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -87,5 +85,5 @@ export default function Example() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }

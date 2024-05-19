@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Seni = () => {
     const [songs, setSongs] = useState([]);
@@ -47,11 +48,10 @@ const Seni = () => {
 
     return (
         <div className="min-h-screen">
-
             <section className="bg-center mt-4">
                 <div className="h-full flex flex-col items-center justify-center relative">
                     <div className="flex items-center w-full">
-                        <a href="/news" className="absolute left-0 text-gray text-xl font-bold hover:text-white transition-colors duration-300 p-4">Back</a>
+                    <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-white transition-colors duration-300 p-4">Back</Link>
                         <h2 className="text-4xl text-white font-bold p-4 flex-1 text-center">Papua Music & Film</h2>
                     </div>
                     <nav className="py-8">

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import WeatherCard from '../Cards/WeatherCard.jsx';
-import Card from '../Cards/Card.jsx';
+import WeatherCard from '../Cards/WeatherCard';
+import Card from '../Cards/Card';
+import { Link } from 'react-router-dom';
 
 function News() {
   const [weatherData, setWeatherData] = useState([]);
@@ -24,10 +25,6 @@ function News() {
     fetchWeather();
   }, []);
 
-  const handleClick = (route) => () => {
-    window.location.href = route;
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center p-4">
       <main className="flex flex-wrap justify-center mt-6">
@@ -36,18 +33,20 @@ function News() {
         ))}
       </main>
       <div className="flex flex-wrap justify-center mt-6 gap-6">
-        <Card 
-          image="./Gambar/koran.jpg" 
-          title="Berita" 
-          description="Klik di sini..."
-          onClick={handleClick("/NewsPage")}
-        />
-        <Card 
-          image="./Gambar/pop.png" 
-          title="Papua Pop" 
-          description="Klik di sini..."
-          onClick={handleClick("/seni")}
-        />
+        <Link to="/NewsPage" className="no-underline">
+          <Card 
+            image="./Gambar/koran.jpg" 
+            title="Berita" 
+            description="Klik di sini..."
+          />
+        </Link>
+        <Link to="/seni" className="no-underline">
+          <Card 
+            image="./Gambar/pop.png" 
+            title="Papua Pop" 
+            description="Klik di sini..."
+          />
+        </Link>
       </div>
     </div>
   );
