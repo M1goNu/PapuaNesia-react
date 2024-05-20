@@ -17,7 +17,7 @@ const NewsPage = () => {
           title: article.title,
           description: article.description,
           url: article.link,
-          urlToImage: article.image_url || 'https://via.placeholder.com/150' // Pengganti jika tidak ada gambar
+          urlToImage: article.image_url || 'https://via.placeholder.com/150' 
         }));
 
         setNews(articles);
