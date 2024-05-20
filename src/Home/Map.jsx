@@ -3,8 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 const slides = [
   "./public/Gambar/baru.jpg",
   "./public/Gambar/map.jpg",
-  "./publicGambar/2.jpg",
-  "./publicGambar/papua1.jpg"
+  "./public/Gambar/2.jpg",
+  "./public/Gambar/papua1.jpg"
 ];
 
 function Map() {
