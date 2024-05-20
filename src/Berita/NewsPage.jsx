@@ -7,10 +7,20 @@ const NewsPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('https://newsapi.org/v2/everything?q=Papua&language=id&apiKey=3fc43beabbec409788843978bc597b03')
+    const apiKey = 'pub_44511a2b75fc6a6012efb998a1526e4f8a9da'; 
+    const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=Papua&country=id&language=id`;
+
+    fetch(url)
       .then(response => response.json())
       .then(data => {
-        const filteredArticles = data.articles.filter(article => {
+        const articles = data.results.map(article => ({
+          title: article.title,
+          description: article.description,
+          url: article.link,
+          urlToImage: article.image_url || 'https://via.placeholder.com/150' // Placeholder if no image
+        }));
+
+        const filteredArticles = articles.filter(article => {
           const title = article.title.toLowerCase();
           return !title.includes('viagra') && !title.includes('obat kuat');
         });
@@ -39,7 +49,7 @@ const NewsPage = () => {
       <h1 className="text-3xl font-bold text-center mb-8">Berita Papua</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {news.map((article, index) => (
-          <div key={index} className="bg-costumWhite p-6 rounded-lg shadow-lg">
+          <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
             <img src={article.urlToImage} alt={article.title} className="w-full h-48 object-cover mb-4 rounded-lg" />
             <h2 className="text-xl font-bold mb-2">{article.title}</h2>
             <p className="text-gray-700 mb-4">{article.description}</p>
