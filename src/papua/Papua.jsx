@@ -6,8 +6,8 @@ function Papua() {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [history, setHistory] = useState('');
-  const [culinary, setCulinary] = useState('');
-  const [traditionCulture, setTraditionCulture] = useState('');
+  const [culture, setCulture] = useState('');
+  const [tourism, setTourism] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -24,9 +24,12 @@ function Papua() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(pageResponse.data, 'text/html');
 
-        const sections = ['Sejarah', 'Tradisi_dan_budaya'];
+        const sections = ['Sejarah', 'Kebudayaan', 'Pariwisata', 'Tradisi_dan_budaya'];
+
         const sectionContent = {
           Sejarah: '',
+          Kebudayaan: '',
+          Pariwisata: '',
           Tradisi_dan_budaya: ''
         };
 
@@ -46,7 +49,8 @@ function Papua() {
         });
 
         setHistory(sectionContent.Sejarah);
-        setTraditionCulture(sectionContent.Tradisi_dan_budaya);
+        setCulture(sectionContent.Kebudayaan);
+        setTourism(sectionContent.Pariwisata);
 
       } catch (error) {
         console.error('Error fetching data from Wikipedia:', error);
@@ -63,35 +67,55 @@ function Papua() {
     const doc = parser.parseFromString(htmlContent, 'text/html');
     const images = doc.querySelectorAll('img');
     images.forEach(img => {
-      img.classList.add('w-250', 'h-250', 'mb-4', 'rounded-lg');
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('flex', 'justify-center', 'mb-4');
+      img.classList.add('w-full', 'h-full', 'rounded-lg');
+      img.parentNode.insertBefore(wrapper, img);
+      wrapper.appendChild(img);
     });
     return doc.body.innerHTML;
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <div className="container mx-auto py-8">
-        <h1 className="text-4xl font-bold mb-4 text-center text-blue-800">Papua Selatan</h1>
-        {isLoading ? (
-          <div className="text-center">Loading...</div>
-        ) : (
-          <>
-            {image && (
-              <div className="flex justify-center mb-4">
-                <img src={image} alt="Papua Selatan" className="w-full max-w-4xl rounded-lg" />
-              </div>
-            )}
-            <p className="text-gray-800 text-lg mb-6">{description}</p>
-            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-              <h2 className="text-2xl font-bold mb-4">Sejarah</h2>
-              <div className="text-gray-800" dangerouslySetInnerHTML={{ __html: history }} />
-            </div>
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-bold mb-4">Tradisi dan Budaya</h2>
-              <div className="text-gray-800" dangerouslySetInnerHTML={{ __html: traditionCulture }} />
-            </div>
-          </>
-        )}
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow p-4">
+        <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+          <h1 className="text-3xl font-bold mb-4 text-center">Papua</h1>
+          {isLoading ? (
+            <div className="text-center">Loading...</div>
+          ) : (
+            <>
+              {image && (
+                <div className="flex justify-center mb-4">
+                  <img src={image} alt="Papua" className="w-auto h-auto mb-4 rounded-lg" />
+                </div>
+              )}
+              <h2 className="text-xl font-semibold mb-2">{description}</h2>
+              <p className="text-gray-700 mb-4">{content}</p>
+              
+              {history && (
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
+                  <h2 className="text-xl font-semibold mb-2">Sejarah</h2>
+                  <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: history }} />
+                </div>
+              )}
+              
+              {culture && (
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
+                  <h2 className="text-xl font-semibold mb-2">Kebudayaan</h2>
+                  <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
+                </div>
+              )}
+
+              {tourism && (
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
+                  <h2 className="text-xl font-semibold mb-2">Pariwisata</h2>
+                  <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: tourism }} />
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

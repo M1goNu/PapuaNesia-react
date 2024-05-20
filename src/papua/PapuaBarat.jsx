@@ -69,7 +69,11 @@ function PapuaBarat() {
     const doc = parser.parseFromString(htmlContent, 'text/html');
     const images = doc.querySelectorAll('img');
     images.forEach(img => {
-      img.classList.add('w-full', 'mb-4', 'rounded-lg');
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('flex', 'justify-center', 'mb-4');
+      img.classList.add('w-full', 'h-full', 'rounded-lg');
+      img.parentNode.insertBefore(wrapper, img);
+      wrapper.appendChild(img);
     });
     return doc.body.innerHTML;
   };

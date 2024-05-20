@@ -8,6 +8,7 @@ function PapuaPegunungan() {
   const [history, setHistory] = useState('');
   const [culture, setCulture] = useState('');
   const [tourism, setTourism] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +54,8 @@ function PapuaPegunungan() {
 
       } catch (error) {
         console.error('Error fetching data from Wikipedia:', error);
+      } finally {
+        setIsLoading(false); // Set isLoading to false when data fetching is done
       }
     };
 
@@ -64,7 +67,11 @@ function PapuaPegunungan() {
     const doc = parser.parseFromString(htmlContent, 'text/html');
     const images = doc.querySelectorAll('img');
     images.forEach(img => {
-      img.classList.add('w-500', 'h-500', 'mb-4', 'rounded-lg');
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('flex', 'justify-center', 'mb-4');
+      img.classList.add('w-full', 'h-full', 'rounded-lg');
+      img.parentNode.insertBefore(wrapper, img);
+      wrapper.appendChild(img);
     });
     return doc.body.innerHTML;
   };
@@ -74,33 +81,39 @@ function PapuaPegunungan() {
       <div className="flex-grow p-4">
         <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
           <h1 className="text-3xl font-bold mb-4">Papua Pegunungan</h1>
-          {image && (
-            <div className="flex justify-center mb-4">
-              <img src={image} alt="Papua Pegunungan" className="w-auto h-auto mb-4 rounded-lg" />
-            </div>
-          )}
-          <h2 className="text-xl font-semibold mb-2">{description}</h2>
-          <p className="text-gray-700 mb-4">{content}</p>
-          
-          {history && (
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Sejarah</h2>
-              <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: history }} />
-            </div>
-          )}
-          
-          {culture && (
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Kebudayaan</h2>
-              <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
-            </div>
-          )}
+          {isLoading ? (
+            <div className="text-center">Loading...</div>
+          ) : (
+            <>
+              {image && (
+                <div className="flex justify-center mb-4">
+                  <img src={image} alt="Papua Pegunungan" className="w-auto h-auto mb-4 rounded-lg" />
+                </div>
+              )}
+              <h2 className="text-xl font-semibold mb-2">{description}</h2>
+              <p className="text-gray-700 mb-4">{content}</p>
+              
+              {history && (
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
+                  <h2 className="text-xl font-semibold mb-2">Sejarah</h2>
+                  <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: history }} />
+                </div>
+              )}
+              
+              {culture && (
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
+                  <h2 className="text-xl font-semibold mb-2">Kebudayaan</h2>
+                  <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
+                </div>
+              )}
 
-          {tourism && (
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Pariwisata</h2>
-              <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: tourism }} />
-            </div>
+              {tourism && (
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
+                  <h2 className="text-xl font-semibold mb-2">Pariwisata</h2>
+                  <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: tourism }} />
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

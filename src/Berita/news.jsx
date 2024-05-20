@@ -49,7 +49,7 @@ function News() {
         </Link>
         <Link to="/pahlawan" className="no-underline">
           <Card 
-            image="./Gambar/pop.png" 
+            image="./Gambar/pahlawan.png" 
             title="pahlawan" 
             description="Klik di sini..."
           />

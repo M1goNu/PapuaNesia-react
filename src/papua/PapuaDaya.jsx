@@ -66,7 +66,11 @@ function PapuaDaya() {
     const doc = parser.parseFromString(htmlContent, 'text/html');
     const images = doc.querySelectorAll('img');
     images.forEach(img => {
-      img.classList.add('w-250', 'h-250', 'mb-4', 'rounded-lg');
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('flex', 'justify-center', 'mb-4');
+      img.classList.add('w-full', 'h-full', 'rounded-lg');
+      img.parentNode.insertBefore(wrapper, img);
+      wrapper.appendChild(img);
     });
     return doc.body.innerHTML;
   };
@@ -75,35 +79,35 @@ function PapuaDaya() {
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow p-4">
         <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold mb-4">Papua Selatan</h1>
+          <h1 className="text-3xl font-bold mb-4 text-center">Papua Barat Daya</h1>
           {isLoading ? (
             <div className="text-center">Loading...</div>
           ) : (
             <>
               {image && (
                 <div className="flex justify-center mb-4">
-                  <img src={image} alt="Papua Selatan" className="w-auto h-auto mb-4 rounded-lg" />
+                  <img src={image} alt="Papua Daya" className="w-auto h-auto mb-4 rounded-lg" />
                 </div>
               )}
               <h2 className="text-xl font-semibold mb-2">{description}</h2>
               <p className="text-gray-700 mb-4">{content}</p>
               
               {history && (
-                <div>
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
                   <h2 className="text-xl font-semibold mb-2">Sejarah</h2>
                   <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: history }} />
                 </div>
               )}
               
               {culture && (
-                <div>
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
                   <h2 className="text-xl font-semibold mb-2">Kebudayaan</h2>
                   <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
                 </div>
               )}
 
               {tourism && (
-                <div>
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
                   <h2 className="text-xl font-semibold mb-2">Pariwisata</h2>
                   <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: tourism }} />
                 </div>

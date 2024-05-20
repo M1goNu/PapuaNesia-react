@@ -67,7 +67,11 @@ function PapuaTengah() {
     const doc = parser.parseFromString(htmlContent, 'text/html');
     const images = doc.querySelectorAll('img');
     images.forEach(img => {
-      img.classList.add('w-250', 'h-250', 'mb-4', 'rounded-lg');
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('flex', 'justify-center', 'mb-4');
+      img.classList.add('w-full', 'h-full', 'rounded-lg');
+      img.parentNode.insertBefore(wrapper, img);
+      wrapper.appendChild(img);
     });
     return doc.body.innerHTML;
   };
@@ -90,21 +94,21 @@ function PapuaTengah() {
               <p className="text-gray-700 mb-4">{content}</p>
               
               {history && (
-                <div>
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
                   <h2 className="text-xl font-semibold mb-2">Sejarah</h2>
                   <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: history }} />
                 </div>
               )}
               
               {culture && (
-                <div>
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
                   <h2 className="text-xl font-semibold mb-2">Kebudayaan</h2>
                   <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
                 </div>
               )}
 
               {tourism && (
-                <div>
+                <div className='"bg-white rounded-lg shadow-lg p-6 mb-8"'>
                   <h2 className="text-xl font-semibold mb-2">Pariwisata</h2>
                   <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: tourism }} />
                 </div>
