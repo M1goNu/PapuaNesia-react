@@ -37,21 +37,18 @@ function News() {
           <Card 
             image="./Gambar/koran.jpg" 
             title="Berita" 
-            description="Klik di sini..."
           />
         </Link>
         <Link to="/seni" className="no-underline">
           <Card 
             image="./Gambar/pop.png" 
             title="Papua Pop" 
-            description="Klik di sini..."
           />
         </Link>
         <Link to="/pahlawan" className="no-underline">
           <Card 
             image="./Gambar/pahlawan.png" 
             title="pahlawan" 
-            description="Klik di sini..."
           />
         </Link>
       </div>
