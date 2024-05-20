@@ -47,6 +47,13 @@ function News() {
             description="Klik di sini..."
           />
         </Link>
+        <Link to="/pahlawan" className="no-underline">
+          <Card 
+            image="./Gambar/pop.png" 
+            title="pahlawan" 
+            description="Klik di sini..."
+          />
+        </Link>
       </div>
     </div>
   );

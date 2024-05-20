@@ -14,6 +14,7 @@ import News from './Berita/news';
 import Berita from './Berita/NewsPage';
 import Seni from './Berita/seni';
 import NewsPage from './Berita/NewsPage';
+import Pahlawan from './Berita/pahlawan';
 
 import PapuaTengah from './papua/papuaTengah';
 import PapuaPegunungan from './papua/papuaPegunungan';
@@ -40,6 +41,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/NewsPage" element={<NewsPage />} />
           <Route path="/seni" element={<Seni />} />
+          <Route path="/pahlawan" element={<Pahlawan />} />
         </Routes>
         <Footer />
       </div>
