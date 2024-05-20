@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const slides = [
-  "Gambar/baru.jpg",
-  "Gambar/map.jpg",
-  "Gambar/2.jpg",
-  "Gambar/papua1.jpg"
+  "<a href='https://im.ge/i/baru.KrRIzm'><img src='https://i.im.ge/2024/05/20/KrRIzm.baru.jpeg' alt='baru' border='0'></a>",
+  require('./Gambar/map.jpg'), // Import local images or provide correct paths
+  require('./Gambar/2.jpg'),
+  require('./Gambar/papua1.jpg')
 ];
 
 function Map() {
@@ -39,7 +39,11 @@ function Map() {
           id={`slide${index + 1}`}
           className={`carousel-item relative w-full ${currentSlide === index + 1 ? 'block' : 'hidden'}`}
         >
-          <img src={image} className="w-full" alt={`Slide ${index + 1}`} />
+          {typeof image === 'string' ? (
+            <div dangerouslySetInnerHTML={{ __html: image }} />
+          ) : (
+            <img src={image} className="w-full" alt={`Slide ${index + 1}`} />
+          )}
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <button
               className="btn btn-circle"

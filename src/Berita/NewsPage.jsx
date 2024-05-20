@@ -13,19 +13,14 @@ const NewsPage = () => {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        const articles = data.results.map(article => ({
+        const articles = data.results.filter(article => article.title.toLowerCase().includes('papua')).map(article => ({
           title: article.title,
           description: article.description,
           url: article.link,
-          urlToImage: article.image_url || 'https://via.placeholder.com/150' // Placeholder if no image
+          urlToImage: article.image_url || 'https://via.placeholder.com/150' // Pengganti jika tidak ada gambar
         }));
 
-        const filteredArticles = articles.filter(article => {
-          const title = article.title.toLowerCase();
-          return !title.includes('viagra') && !title.includes('obat kuat');
-        });
-
-        setNews(filteredArticles);
+        setNews(articles);
         setLoading(false);
       })
       .catch(error => {
