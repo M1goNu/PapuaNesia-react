@@ -5,14 +5,15 @@ function PapuaSelatan() {
   const [content, setContent] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const [history, setHistory] = useState('');
   const [culture, setCulture] = useState('');
   const [tourism, setTourism] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const summaryResponse = await axios.get('https://id.wikipedia.org/api/rest_v1/page/summary/Papua_Selatan');
-        console.log(summaryResponse.data);
         setContent(summaryResponse.data.extract);
         setDescription(summaryResponse.data.description);
         if (summaryResponse.data.thumbnail) {
@@ -23,22 +24,38 @@ function PapuaSelatan() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(pageResponse.data, 'text/html');
 
-        const cultureSection = doc.querySelector('#Kebudayaan');
-        if (cultureSection) {
-          const cultureContent = cultureSection.nextElementSibling.innerHTML;
-          const updatedCultureContent = updateImageClass(cultureContent);
-          setCulture(updatedCultureContent);
-        }
+        const sections = ['Sejarah', 'Kebudayaan', 'Pariwisata', 'Tradisi_dan_budaya'];
 
-        const tourismSection = doc.querySelector('#Pariwisata');
-        if (tourismSection) {
-          const tourismContent = tourismSection.nextElementSibling.innerHTML;
-          const updatedTourismContent = updateImageClass(tourismContent);
-          setTourism(updatedTourismContent);
-        }
+        const sectionContent = {
+          Sejarah: '',
+          Kebudayaan: '',
+          Pariwisata: '',
+          Tradisi_dan_budaya: ''
+        };
+
+        sections.forEach(section => {
+          const sectionElement = doc.querySelector(`#${section}`);
+          if (sectionElement) {
+            let nextElement = sectionElement.nextElementSibling;
+            let content = '';
+
+            while (nextElement && !sections.includes(nextElement.tagName === 'H2' ? nextElement.id : '')) {
+              content += nextElement.outerHTML;
+              nextElement = nextElement.nextElementSibling;
+            }
+
+            sectionContent[section] = updateImageClass(content);
+          }
+        });
+
+        setHistory(sectionContent.Sejarah);
+        setCulture(sectionContent.Kebudayaan);
+        setTourism(sectionContent.Pariwisata);
 
       } catch (error) {
         console.error('Error fetching data from Wikipedia:', error);
+      } finally {
+        setIsLoading(false); // Set isLoading to false when data fetching is done
       }
     };
 
@@ -60,26 +77,39 @@ function PapuaSelatan() {
       <div className="flex-grow p-4">
         <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
           <h1 className="text-3xl font-bold mb-4">Papua Selatan</h1>
-          {image && (
-            <div className="flex justify-center mb-4">
-              <img src={image} alt="Papua Selatan" className="w-auto h-auto mb-4 rounded-lg" />
-            </div>
-          )}
-          <h2 className="text-xl font-semibold mb-2">{description}</h2>
-          <p className="text-gray-700 mb-4">{content}</p>
-          
-          {culture && (
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Kebudayaan</h2>
-              <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
-            </div>
-          )}
-          
-          {tourism && (
-            <div>
-              <h2 className="text-xl font-semibold mb-2">Pariwisata</h2>
-              <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: tourism }} />
-            </div>
+          {isLoading ? (
+            <div className="text-center">Loading...</div>
+          ) : (
+            <>
+              {image && (
+                <div className="flex justify-center mb-4">
+                  <img src={image} alt="Papua Selatan" className="w-auto h-auto mb-4 rounded-lg" />
+                </div>
+              )}
+              <h2 className="text-xl font-semibold mb-2">{description}</h2>
+              <p className="text-gray-700 mb-4">{content}</p>
+              
+              {history && (
+                <div>
+                  <h2 className="text-xl font-semibold mb-2">Sejarah</h2>
+                  <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: history }} />
+                </div>
+              )}
+              
+              {culture && (
+                <div>
+                  <h2 className="text-xl font-semibold mb-2">Kebudayaan</h2>
+                  <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
+                </div>
+              )}
+
+              {tourism && (
+                <div>
+                  <h2 className="text-xl font-semibold mb-2">Pariwisata</h2>
+                  <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: tourism }} />
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

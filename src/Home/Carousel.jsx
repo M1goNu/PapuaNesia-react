@@ -21,13 +21,9 @@ function Carousel() {
 
   return (
     <div className="carousel text-center mx-auto relative w-full">
-      <div className="absolute top-1/2 transform -translate-y-1/2 left-5">
-        <button onClick={goToPreviousCard} className="btn btn-circle bg-gray-200 hover:bg-gray-300 text-gray-700">
-          ❮
-        </button>
-      </div>
-      <div className="carousel-container flex justify-center items-center h-full w-full">
-        <div className="card bg-customRed text-white p-8 m-4 rounded-lg shadow-lg w-full max-w-3xl flex flex-col items-center">
+      
+      <div className="carousel-container flex justify-center items-center h-full w-full relative">
+        <div className="card bg-customRed text-white p-8 m-4 rounded-lg shadow-lg w-full max-w-3xl flex flex-col items-center relative z-10">
           <div className="card-image mb-4 flex justify-center w-full">
             <ReactPlayer url={cards[currentIndex].url} className="w-full h-64" />
           </div>
@@ -35,13 +31,17 @@ function Carousel() {
           <p className="card-description text-lg font-bold text-white text-center">{cards[currentIndex].description}</p>
         </div>
       </div>
-      <div className="absolute top-1/2 transform -translate-y-1/2 right-5">
+      <div className="absolute top-1/2 transform -translate-y-1/2 right-5 z-20">
         <button onClick={goToNextCard} className="btn btn-circle bg-gray-200 hover:bg-gray-300 text-gray-700">
-          ❯
+        ❯
+        </button>
+      </div>
+      <div className="absolute top-1/2 transform -translate-y-1/2 left-5 z-20">
+        <button onClick={goToPreviousCard} className="btn btn-circle bg-gray-200 hover:bg-gray-300 text-gray-700">
+        ❮
         </button>
       </div>
     </div>
   );
 }
-
 export default Carousel;

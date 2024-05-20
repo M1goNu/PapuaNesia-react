@@ -54,10 +54,6 @@ const Seni = () => {
                     <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-white transition-colors duration-300 p-4">Back</Link>
                         <h2 className="text-4xl text-white font-bold p-4 flex-1 text-center">Papua Music & Film</h2>
                     </div>
-                    <nav className="py-8">
-                        <a href="#songs" className="px-4 text-gray-500 font-bold hover:text-white transition-colors duration-300">Songs</a>
-                        <a href="#films" className="px-4 text-gray-500 font-bold hover:text-white transition-colors duration-300">Films</a>
-                    </nav>
                 </div>
             </section>
 

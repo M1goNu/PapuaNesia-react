@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const cardsData = [
@@ -11,65 +11,16 @@ export const cardsData = [
 ];
 
 function Kota() {
-  const [currentSlide, setCurrentSlide] = useState(1);
-  const totalSlides = Math.ceil(cardsData.length / 3);
-
-  const handleSlideChange = (slideNumber) => {
-    setCurrentSlide(slideNumber);
-  };
-
-  const handlePrevButtonClick = (event) => {
-    event.preventDefault();
-    const prevSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
-    handleSlideChange(prevSlide);
-  };
-
-  const handleNextButtonClick = (event) => {
-    event.preventDefault();
-    const nextSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
-    handleSlideChange(nextSlide);
-  };
-
   return (
     <div className="kota flex justify-center items-center px-4">
-      <div className="carousel w-full relative">
-        {[...Array(totalSlides)].map((_, slideIndex) => (
-          <div
-            key={slideIndex}
-            className={`carousel-item relative w-full ${currentSlide === slideIndex + 1 ? 'block' : 'hidden'}`}
-          >
-            <div className="flex flex-wrap justify-center">
-              {cardsData.slice(slideIndex * 3, (slideIndex + 1) * 3).map((card, index) => (
-                <Card
-                  key={index}
-                  image={card.image}
-                  title={card.title}
-                  route={card.route}
-                />
-              ))}
-            </div>
-            <div className="absolute flex justify-between transform -translate-y-1/2 left-2 right-2 top-1/2">
-              <button
-                className="btn btn-circle"
-                onClick={handlePrevButtonClick}
-              >❮</button>
-              <button
-                className="btn btn-circle"
-                onClick={handleNextButtonClick}
-              >❯</button>
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 text-center mb-4">
-              <div className="flex justify-center items-center">
-                {[...Array(totalSlides)].map((_, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleSlideChange(index + 1)}
-                    className={`h-4 w-4 rounded-full mx-1 cursor-pointer ${index + 1 === currentSlide ? 'bg-blue-500' : 'bg-gray-300'}`}
-                  ></div>
-                ))}
-              </div>
-            </div>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {cardsData.map((card, index) => (
+          <Card
+            key={index}
+            image={card.image}
+            title={card.title}
+            route={card.route}
+          />
         ))}
       </div>
     </div>

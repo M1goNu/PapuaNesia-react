@@ -5,6 +5,7 @@ function PapuaPegunungan() {
   const [content, setContent] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const [history, setHistory] = useState('');
   const [culture, setCulture] = useState('');
   const [tourism, setTourism] = useState('');
 
@@ -12,7 +13,6 @@ function PapuaPegunungan() {
     const fetchData = async () => {
       try {
         const summaryResponse = await axios.get('https://id.wikipedia.org/api/rest_v1/page/summary/Papua_Pegunungan');
-        console.log(summaryResponse.data);
         setContent(summaryResponse.data.extract);
         setDescription(summaryResponse.data.description);
         if (summaryResponse.data.thumbnail) {
@@ -23,19 +23,33 @@ function PapuaPegunungan() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(pageResponse.data, 'text/html');
 
-        const cultureSection = doc.querySelector('#Kebudayaan');
-        if (cultureSection) {
-          const cultureContent = cultureSection.nextElementSibling.innerHTML;
-          const updatedCultureContent = updateImageClass(cultureContent);
-          setCulture(updatedCultureContent);
-        }
+        const sections = ['Sejarah', 'Kebudayaan', 'Pariwisata', 'Tradisi_dan_budaya'];
 
-        const tourismSection = doc.querySelector('#Pariwisata');
-        if (tourismSection) {
-          const tourismContent = tourismSection.nextElementSibling.innerHTML;
-          const updatedTourismContent = updateImageClass(tourismContent);
-          setTourism(updatedTourismContent);
-        }
+        const sectionContent = {
+          Sejarah: '',
+          Kebudayaan: '',
+          Pariwisata: '',
+          Tradisi_dan_budaya: ''
+        };
+
+        sections.forEach(section => {
+          const sectionElement = doc.querySelector(`#${section}`);
+          if (sectionElement) {
+            let nextElement = sectionElement.nextElementSibling;
+            let content = '';
+
+            while (nextElement && !sections.includes(nextElement.tagName === 'H2' ? nextElement.id : '')) {
+              content += nextElement.outerHTML;
+              nextElement = nextElement.nextElementSibling;
+            }
+
+            sectionContent[section] = updateImageClass(content);
+          }
+        });
+
+        setHistory(sectionContent.Sejarah);
+        setCulture(sectionContent.Kebudayaan);
+        setTourism(sectionContent.Pariwisata);
 
       } catch (error) {
         console.error('Error fetching data from Wikipedia:', error);
@@ -68,17 +82,24 @@ function PapuaPegunungan() {
           <h2 className="text-xl font-semibold mb-2">{description}</h2>
           <p className="text-gray-700 mb-4">{content}</p>
           
+          {history && (
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Sejarah</h2>
+              <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: history }} />
+            </div>
+          )}
+          
           {culture && (
             <div>
               <h2 className="text-xl font-semibold mb-2">Kebudayaan</h2>
               <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
             </div>
           )}
-          
+
           {tourism && (
             <div>
               <h2 className="text-xl font-semibold mb-2">Pariwisata</h2>
-              <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: tourism }} />
+              <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: tourism }} />
             </div>
           )}
         </div>
