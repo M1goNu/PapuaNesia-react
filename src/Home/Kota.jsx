@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const cardsData = [
-  { image: './Gambar/papuagunung.svg', title: 'Papua Pegunungan', route: '/papuaPegunungan' },
-  { image: './Gambar/tengah.jpeg', title: 'Papua Tengah', route: '/papuaTengah' },
+  { image: './Gambar/gunung.png', title: 'Papua Pegunungan', route: '/papuaPegunungan' },
+  { image: './Gambar/tengah.png', title: 'Papua Tengah', route: '/papuaTengah' },
   { image: './Gambar/selatan.jpg', title: 'Papua Selatan', route: '/papuaSelatan' },
-  { image: './Gambar/logopapua.png', title: 'Papua', route: '/papua' },
-  { image: './Gambar/Barat.png', title: 'Papua Barat', route: '/papuaBarat' },
-  { image: './Gambar/daya.jpeg', title: 'Papua Barat Daya', route: '/papuaDaya' },
+  { image: './Gambar/papua.png', title: 'Papua', route: '/papua' },
+  { image: './Gambar/barat.png', title: 'Papua Barat', route: '/papuaBarat' },
+  { image: './Gambar/daya.png', title: 'Papua Barat Daya', route: '/papuaDaya' },
 ];
 
 function Kota() {
