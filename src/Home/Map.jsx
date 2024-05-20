@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const slides = [
-  "Gambar/baru.jpg",
+  "src/Home/baru.jpg",
   "Gambar/map.jpg",
   "Gambar/2.jpg",
   "Gambar/papua1.jpg"
