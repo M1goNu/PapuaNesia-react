@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const slides = [
-  "[url=https://ibb.co.com/RyySPpm][img]https://i.ibb.co.com/6BBZbRx/2.jpg[/img][/url]",
+  "https://ibb.co.com/RyySPpm",
   "Gambar/map.jpg",
   "Gambar/2.jpg",
   "Gambar/papua1.jpg"
