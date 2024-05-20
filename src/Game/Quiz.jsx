@@ -1,13 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./Quiz.css";
 import { data } from "../assets/data";
-import ReCAPTCHA from "react-google-recaptcha";
-
-
-function onChange(value) {
-  console.log("Captcha value:", value);
-  setIsVerified(true);
-}
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -28,7 +21,6 @@ const Quiz = () => {
   let [score, setScore] = useState(0);
   let [result, setResult] = useState(false);
   let [questionHistory, setQuestionHistory] = useState([index]);
-  const [isVerified, setIsVerified] = useState(false);
 
   let Option1 = useRef(null);
   let Option2 = useRef(null);
@@ -41,15 +33,10 @@ const Quiz = () => {
   const [showUsernamePopup, setShowUsernamePopup] = useState(true);
 
   const handleStartQuiz = () => {
-    if (username.trim() !== "" && isVerified) {
+    if (username.trim() !== "") {
       setShowUsernamePopup(false);
     }
   };
-
-  function onChange(value) {
-    console.log("Captcha value:", value);
-    setIsVerified(true);
-  }
 
   const checkAns = (e, ans) => {
     if (lock === false) {
@@ -106,19 +93,18 @@ const Quiz = () => {
 
   return (
     <div className="container">
-    {showUsernamePopup && (
-      <div className="username-popup flex flex-col items-center justify-center">
-        <h2 className="text-center mb-4">Enter Your Username</h2>
-        <input
-          className="usernameDex mb-10 p-2 border border-gray-300 rounded"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <ReCAPTCHA sitekey="6LencNkpAAAAAGYqVlqh7GtOZ_4jbszJ0IMbWWTq" onChange={onChange}/>
-        <button onClick={handleStartQuiz} className="bg-blue-500 mt-3 text-white p-2 rounded" disabled={!isVerified}>Start Quiz</button>
-      </div>
-    )}
+      {showUsernamePopup && (
+        <div className="username-popup flex flex-col items-center justify-center">
+          <h2 className="text-center mb-4">Enter Your Username</h2>
+          <input
+            className="usernameDex mb-10 p-2 border border-gray-300 rounded"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <button onClick={handleStartQuiz} className="bg-blue-500 mt-3 text-white p-2 rounded">Start Quiz</button>
+        </div>
+      )}
       {!showUsernamePopup && (
         <>
           <h1>Trivia Seputar Papua</h1>

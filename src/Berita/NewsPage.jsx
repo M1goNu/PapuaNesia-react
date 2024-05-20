@@ -13,7 +13,7 @@ const NewsPage = () => {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        const articles = data.results.filter(article => article.title.toLowerCase().includes('papua')).map(article => ({
+        const articles = data.results.map(article => ({
           title: article.title,
           description: article.description,
           url: article.link,
