@@ -40,7 +40,7 @@ function Map() {
           className={`carousel-item relative w-full ${currentSlide === index + 1 ? 'block' : 'hidden'}`}
         >
           <img src={image} className="w-full" alt={`Slide ${index + 1}`} />
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+          <div className={`absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 ${window.innerWidth < 768 ? 'hidden' : 'block'}`}>
             <button
               className="btn btn-circle"
               onClick={() => handleSlideChange(index === 0 ? slides.length : index)}

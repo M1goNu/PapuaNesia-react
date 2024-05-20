@@ -10,7 +10,6 @@ const Pahlawan = () => {
     axios.get('https://indonesia-public-static-api.vercel.app/api/heroes')
       .then(response => {
         setHeroes(response.data);
-        // Filter heroes from Papua directly
         const filtered = response.data.filter(hero => {
           return hero.region === "Papua" || hero.description.toLowerCase().includes("papua");
         });
@@ -28,7 +27,6 @@ const Pahlawan = () => {
         {filteredHeroes.map(hero => (
           <div key={hero.id} className="bg-white shadow-md rounded-lg p-4">
             <h2 className="text-xl font-semibold">{hero.name}</h2>
-            <img src={hero.image} alt={hero.name} className="mt-2 mb-2 h-40 w-full object-cover rounded-md" />
             <p className="mt-2 text-gray-600">{hero.description}</p>
           </div>
         ))}

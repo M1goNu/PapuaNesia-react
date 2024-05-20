@@ -9,7 +9,7 @@ export default {
       colors: {
         customRed: '#A91D3A',
         costumBlack: '#151515',
-        costumWhite: '#EEEEEE',
+        costumWhite: '#F1F1F1',
         costumMerah: '#C73659',
       },
     },
