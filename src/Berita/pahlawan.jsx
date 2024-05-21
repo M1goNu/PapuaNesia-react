@@ -21,8 +21,9 @@ const Pahlawan = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Pahlawan Daerah Papua</h1>
+    <div className="container flex flex-col mx-auto p-4">
+      <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-white transition-colors duration-300 p-4">Back</Link>
+      <h1 className="text-3xl font-bold mb-4 text-center">Pahlawan Daerah Papua</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredHeroes.map(hero => (
           <div key={hero.id} className="bg-white shadow-md rounded-lg p-4">

@@ -50,8 +50,8 @@ const Seni = () => {
         <div className="min-h-screen">
             <section className="bg-center mt-4">
                 <div className="h-full flex flex-col items-center justify-center relative">
-                    <div className="flex items-center w-full">
-                    <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-white transition-colors duration-300 p-4">Back</Link>
+                    <div className="flex:flex-col items-center w-full">
+                    <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-customRed transition-colors duration-300 p-4">Back</Link>
                         <h2 className="text-4xl text-customBlack font-bold p-4 flex-1 text-center">Papua Music & Film</h2>
                     </div>
                 </div>
