@@ -160,7 +160,9 @@ const Quiz = () => {
                  {username ? `${username}, you scored ${score} out of ${shuffledData.length}` : `You scored ${score} out of ${shuffledData.length}`}
               </h2>
               <button onClick={restart}>Restart</button>
-              <button onClick={() => window.location.href = '/'}>Home</button>
+              <Link to="/">
+                <button>Home</button>
+              </Link>
             </>
           )}
         </>

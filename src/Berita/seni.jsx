@@ -52,7 +52,7 @@ const Seni = () => {
                 <div className="h-full flex flex-col items-center justify-center relative">
                     <div className="flex items-center w-full">
                     <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-white transition-colors duration-300 p-4">Back</Link>
-                        <h2 className="text-4xl text-white font-bold p-4 flex-1 text-center">Papua Music & Film</h2>
+                        <h2 className="text-4xl text-customBlack font-bold p-4 flex-1 text-center">Papua Music & Film</h2>
                     </div>
                 </div>
             </section>
@@ -74,7 +74,7 @@ const Seni = () => {
             </section>
 
             <section id="films" className="mx-auto py-8">
-                <h2 className="text-3xl font-bold mb-4 text-center text-white">Top Rated Films</h2>
+                <h2 className="text-3xl font-bold mb-4 text-center text-customBlack">Top Rated Films</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {films.map(film => (
                         <div key={film.id} className="bg-costumBlack rounded-lg overflow-hidden shadow-lg">
