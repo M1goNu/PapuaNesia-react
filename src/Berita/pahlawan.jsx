@@ -21,8 +21,11 @@ const Pahlawan = () => {
   }, []);
 
   return (
-    <div className="container flex flex-col mx-auto p-4">
-      <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-white transition-colors duration-300 p-4">Back</Link>
+    <div className="container flex flex-col mx-auto p-4 relative">
+      <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-customRed transition-colors duration-300 p-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+      </svg>
+      </Link>
       <h1 className="text-3xl font-bold mb-4 text-center">Pahlawan Daerah Papua</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredHeroes.map(hero => (

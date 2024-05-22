@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function PapuaPegunungan() {
   const [content, setContent] = useState('');
@@ -55,7 +56,7 @@ function PapuaPegunungan() {
       } catch (error) {
         console.error('Error fetching data from Wikipedia:', error);
       } finally {
-        setIsLoading(false); // Set isLoading to false when data fetching is done
+        setIsLoading(false); 
       }
     };
 
@@ -79,8 +80,12 @@ function PapuaPegunungan() {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow p-4">
-        <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold mb-4">Papua Pegunungan</h1>
+        <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg relative">
+        <Link to="/" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-customRed transition-colors duration-300 p-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+      </svg>
+      </Link>
+          <h1 className="text-3xl font-bold mb-4 text-center">Papua Pegunungan</h1>
           {isLoading ? (
             <div className="text-center">Loading...</div>
           ) : (

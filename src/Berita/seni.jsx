@@ -32,7 +32,7 @@ const Seni = () => {
             const title = song.name.toLowerCase();
             return !title.includes('indonesia') && !title.includes('merdeka');
         });
-        
+
         setSongs(filteredSongs);
     };
 
@@ -50,8 +50,11 @@ const Seni = () => {
         <div className="min-h-screen">
             <section className="bg-center mt-4">
                 <div className="h-full flex flex-col items-center justify-center relative">
-                    <div className="flex:flex-col items-center w-full">
-                    <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-customRed transition-colors duration-300 p-4">Back</Link>
+                    <div className="items-center w-full">
+                        <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-customRed transition-colors duration-300 p-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                        </svg>
+                        </Link>
                         <h2 className="text-4xl text-customBlack font-bold p-4 flex-1 text-center">Papua Music & Film</h2>
                     </div>
                 </div>
@@ -61,7 +64,7 @@ const Seni = () => {
                 <h2 className="text-3xl font-bold mb-4 text-center">Papua Songs</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {songs.map(song => (
-                        <div key={song.id} className="bg-costumBlack p-4 rounded shadow">
+                        <div key={song.id} className="bg-white p-4 rounded shadow">
                             <img src={song.album.images[0].url} alt={song.name} className="h-40 w-full object-cover rounded mb-4" />
                             <h3 className="text-xl font-bold">{song.name}</h3>
                             <p className="text-gray-700">{song.artists[0].name}</p>
@@ -74,7 +77,7 @@ const Seni = () => {
             </section>
 
             <section id="films" className="mx-auto py-8">
-                <h2 className="text-3xl font-bold mb-4 text-center text-customBlack">Top Rated Films</h2>
+                <h2 className="text-3xl font-bold mb-4 text-center text-white">Papua Film</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {films.map(film => (
                         <div key={film.id} className="bg-costumBlack rounded-lg overflow-hidden shadow-lg">
