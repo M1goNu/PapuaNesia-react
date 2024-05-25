@@ -51,17 +51,18 @@ const Seni = () => {
             <section className="bg-center mt-4">
                 <div className="h-full flex flex-col items-center justify-center relative">
                     <div className="items-center w-full">
-                        <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-customRed transition-colors duration-300 p-4"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-                        </svg>
+                        <Link to="/news" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-customRed transition-colors duration-300 p-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                            </svg>
                         </Link>
-                        <h2 className="text-4xl text-customBlack font-bold p-4 flex-1 text-center">Papua Music & Film</h2>
+                        <h2 className="text-4xl text-customRed font-bold p-4 flex-1 text-center">Papua Music & Film</h2>
                     </div>
                 </div>
             </section>
 
-            <section id="songs">
-                <h2 className="text-3xl font-bold mb-4 text-center">Papua Songs</h2>
+            <section id="songs" className="mx-4 my-8">
+                <h2 className="text-3xl font-bold mb-4 text-center text-customRed">Papua Songs</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {songs.map(song => (
                         <div key={song.id} className="bg-white p-4 rounded shadow">
@@ -76,13 +77,17 @@ const Seni = () => {
                 </div>
             </section>
 
-            <section id="films" className="mx-auto py-8">
-                <h2 className="text-3xl font-bold mb-4 text-center text-white">Papua Film</h2>
+            <section id="films" className="mx-4 my-8 py-8">
+                <h2 className="text-3xl font-bold mb-4 text-center text-customRed">Papua Film</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {films.map(film => (
-                        <div key={film.id} className="bg-costumBlack rounded-lg overflow-hidden shadow-lg">
-                            <img src={`https://image.tmdb.org/t/p/original${film.poster_path}`} alt={film.title} className="object-cover object-center" />
-                            <div className="p-6">
+                        <div key={film.id} className="relative bg-costumBlack rounded-lg overflow-hidden shadow-lg group">
+                            <img
+                                src={`https://image.tmdb.org/t/p/original${film.poster_path}`}
+                                alt={film.title}
+                                className="object-cover object-center w-full h-full group-hover:opacity-10 transition-opacity duration-300"
+                            />
+                            <div className="absolute inset-0 flex flex-col justify-center items-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center text-white">
                                 <h3 className="text-xl font-bold mb-2">{film.title}</h3>
                                 <p className="text-white-700">{film.overview}</p>
                             </div>

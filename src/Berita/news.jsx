@@ -4,7 +4,7 @@ import WeatherCard from '../Cards/WeatherCard';
 import Card from '../Cards/Card';
 import { Link } from 'react-router-dom';
 
-function News() {
+function News({theme}) {
   const [weatherData, setWeatherData] = useState([]);
   const locations = ['Jayapura', 'Manokwari', 'Timika'];
 
@@ -26,29 +26,34 @@ function News() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4">
-      <main className="flex flex-wrap justify-center mt-6">
-        {weatherData.map((weather, index) => (
-          <WeatherCard key={index} weather={weather} />
-        ))}
+    <div className="min-h-screen flex flex-col items-center p-4 mt-5 mb-5">
+      <main className="w-full max-w-6xl mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {weatherData.map((weather, index) => (
+            <WeatherCard key={index} weather={weather} />
+          ))}
+        </div>
       </main>
-      <div className="flex flex-wrap justify-center mt-6 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Link to="/NewsPage" className="no-underline">
           <Card 
             image="./Gambar/koran.jpg" 
             title="Berita" 
+            theme={theme}
           />
         </Link>
         <Link to="/seni" className="no-underline">
           <Card 
             image="./Gambar/pop.png" 
             title="Papua Pop" 
+            theme={theme}
           />
         </Link>
         <Link to="/pahlawan" className="no-underline">
           <Card 
             image="./Gambar/pahlawan.png" 
             title="pahlawan" 
+            theme={theme}
           />
         </Link>
       </div>

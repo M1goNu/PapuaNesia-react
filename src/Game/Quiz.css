@@ -1,7 +1,7 @@
+/* Quiz.css */
 .container {
     width: 640px;
-    margin: auto;
-    margin-top: 150px;
+    margin: 150px auto;
     background: white;
     color: #262626;
     display: flex;
@@ -9,20 +9,21 @@
     gap: 20px;
     border-radius: 10px;
     padding: 40px 50px;
-}
-
-.container hr{
+  }
+  
+  .container hr {
     height: 2px;
     border: none;
-    background:#707070;
-}
-
-.container h2{
+    background: #707070;
+  }
+  
+  .container h2 {
     font-size: 27px;
     font-weight: 500;
-}
-
-.container ul li{
+    text-align: center;
+  }
+  
+  .container ul li {
     display: flex;
     align-items: center;
     height: 70px;
@@ -32,10 +33,10 @@
     margin-bottom: 20px;
     font-size: 20px;
     cursor: pointer;
-}
-
-.container button{
-    margin: auto;
+  }
+  
+  .container button {
+    margin: 10px auto;
     width: 250px;
     height: 65px;
     background: #553f9a;
@@ -43,30 +44,43 @@
     font-size: 25px;
     border-radius: 8px;
     cursor: pointer;
-}
-
-.container .index {
-    margin:auto;
+  }
+  
+  .container .index {
+    margin: auto;
     font-size: 18px;
-}
-
-.container .correct{
-    background:#dffff2;
+  }
+  
+  .container .correct {
+    background: #dffff2;
     border-color: #00d397;
-}
-
-.container .wrong{
-    background:#FFEBEB;
-    border-color:#FF4A4A ;
-}
-
-.username-popup{
-    margin: 10px 0 10px 0;
-
-}
-
-.usernameDex {
-    margin: 10px 0 10px 0;
+  }
+  
+  .container .wrong {
+    background: #ffebeb;
+    border-color: #ff4a4a;
+  }
+  
+  .username-popup {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .usernameDex {
+    margin: 10px 0;
     background-color: white;
     border: solid 1px black;
-}
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  

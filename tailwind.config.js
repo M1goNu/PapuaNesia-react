@@ -5,12 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    darkMode: 'class',
     extend: {
       colors: {
         customRed: '#A91D3A',
-        costumBlack: '#151515',
-        costumWhite: '#F1F1F1',
+        customBlack: '#151515',
+        customWhite: '#F1F1F1',
         costumMerah: '#C73659',
+        costumBlue: '#344C64',
       },
     },
   },

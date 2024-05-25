@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 
-function Carousel() {
+function Carousel({ theme }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cards = [
     { url: 'https://youtu.be/jhGnb4uOUdY?si=W6VlwljXYQO_hK-L', title: "Explore Nature", description: "Discover the breathtaking natural beauty of Papua's forests, mountains, and beaches." },
@@ -21,27 +21,27 @@ function Carousel() {
 
   return (
     <div className="carousel text-center mx-auto relative w-full">
-      
       <div className="carousel-container flex justify-center items-center h-full w-full relative">
-        <div className="card bg-customRed text-white p-8 m-4 rounded-lg shadow-lg w-full max-w-3xl flex flex-col items-center relative z-10">
+        <div className={`card text-white p-8 m-4 rounded-lg shadow-lg w-full max-w-3xl flex flex-col items-center relative z-10 ${theme === 'light' ? 'bg-customRed' : 'bg-costumBlue'}`}>
           <div className="card-image mb-4 flex justify-center w-full">
             <ReactPlayer url={cards[currentIndex].url} className="w-full h-64" />
           </div>
-          <h2 className="card-title text-3xl mb-2 text-center text-white">{cards[currentIndex].title}</h2>
-          <p className="card-description text-lg font-bold text-white text-center">{cards[currentIndex].description}</p>
+          <h2 className="card-title text-3xl mb-2 text-center">{cards[currentIndex].title}</h2>
+          <p className="card-description text-lg font-bold text-center">{cards[currentIndex].description}</p>
         </div>
       </div>
       <div className="absolute top-1/2 transform -translate-y-1/2 right-5 z-20">
         <button onClick={goToNextCard} className="btn btn-circle bg-gray-200 hover:bg-gray-300 text-gray-700">
-        ❯
+          ❯
         </button>
       </div>
       <div className="absolute top-1/2 transform -translate-y-1/2 left-5 z-20">
         <button onClick={goToPreviousCard} className="btn btn-circle bg-gray-200 hover:bg-gray-300 text-gray-700">
-        ❮
+          ❮
         </button>
       </div>
     </div>
   );
 }
+
 export default Carousel;

@@ -10,7 +10,7 @@ export const cardsData = [
   { image: './Gambar/daya.png', title: 'Papua Barat Daya', route: '/papuaDaya' },
 ];
 
-function Kota() {
+function Kota({ theme }) {
   return (
     <div className="kota flex justify-center items-center px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -20,6 +20,7 @@ function Kota() {
             image={card.image}
             title={card.title}
             route={card.route}
+            theme={theme}
           />
         ))}
       </div>
@@ -27,16 +28,16 @@ function Kota() {
   );
 }
 
-const Card = ({ image, title, route }) => (
+const Card = ({ image, title, route, theme }) => (
   <Link
     to={route}
-    className="relative card w-64 h-80 p-4 border border-gray-300 rounded-lg transition-transform duration-300 ease-in-out bg-customRed shadow-lg"
+    className={`relative card w-64 h-80 p-4 border border-gray-300 rounded-lg transition-transform duration-300 ease-in-out shadow-lg ${theme === 'light' ? 'bg-customRed' : 'bg-costumBlue'}`}
     style={{ margin: '10px' }}
   >
     <div className="w-full h-48 overflow-hidden rounded-lg mb-4">
       <img src={image} alt={title} className="w-full h-full object-cover" />
     </div>
-    <h3 className="text-lg mb-2 text-white-800 text-center">{title}</h3>
+    <h3 className="text-lg font-bold text-white text-center">{title}</h3>
   </Link>
 );
 

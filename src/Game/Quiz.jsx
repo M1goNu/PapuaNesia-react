@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Quiz.css";
 import { data } from "../assets/data";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { SuccessAlert, WarningAlert, FailAlert, PassAlert } from "../assets/Alert";
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -15,32 +16,42 @@ const allQuestions = data.slice(0, 30);
 const shuffledData = shuffleArray(allQuestions).slice(0, 10);
 
 const Quiz = () => {
-  let [index, setIndex] = useState(0);
-  let [displayIndex, setDisplayIndex] = useState(1);
-  let [question, setQuestion] = useState(shuffledData[index]);
-  let [lock, setLock] = useState(false);
-  let [score, setScore] = useState(0);
-  let [result, setResult] = useState(false);
-  let [questionHistory, setQuestionHistory] = useState([index]);
+  const [index, setIndex] = useState(0);
+  const [displayIndex, setDisplayIndex] = useState(1);
+  const [question, setQuestion] = useState(shuffledData[index]);
+  const [lock, setLock] = useState(false);
+  const [score, setScore] = useState(0);
+  const [result, setResult] = useState(false);
+  const [questionHistory, setQuestionHistory] = useState([index]);
 
-  let Option1 = useRef(null);
-  let Option2 = useRef(null);
-  let Option3 = useRef(null);
-  let Option4 = useRef(null);
+  const Option1 = useRef(null);
+  const Option2 = useRef(null);
+  const Option3 = useRef(null);
+  const Option4 = useRef(null);
 
-  let option_array = [Option1, Option2, Option3, Option4];
+  const option_array = [Option1, Option2, Option3, Option4];
 
   const [username, setUsername] = useState("");
   const [showUsernamePopup, setShowUsernamePopup] = useState(true);
+  const [alertType, setAlertType] = useState(null);
+
+  useEffect(() => {
+    setQuestion(shuffledData[index]);
+  }, [index]);
 
   const handleStartQuiz = () => {
-    if (username.trim() !== "") {
+    if (username.trim() === "") {
+      setAlertType("warning");
+      setTimeout(() => setAlertType(null), 2000);
+    } else {
       setShowUsernamePopup(false);
+      setAlertType("success");
+      setTimeout(() => setAlertType(null), 2000);
     }
   };
 
   const checkAns = (e, ans) => {
-    if (lock === false) {
+    if (!lock) {
       if (question.ans === ans) {
         e.target.classList.add("correct");
         setLock(true);
@@ -64,17 +75,16 @@ const Quiz = () => {
   };
 
   const next = () => {
-    if (lock === true) {
+    if (lock) {
       if (displayIndex === shuffledData.length) {
         setResult(true);
         return;
       }
       const nextIndex = getNextUniqueQuestion();
       setIndex(nextIndex);
-      setQuestion(shuffledData[nextIndex]);
-      setLock(false);
       setDisplayIndex(displayIndex + 1);
       setQuestionHistory([...questionHistory, nextIndex]);
+      setLock(false);
       option_array.forEach((option) => {
         option.current.classList.remove("correct");
         option.current.classList.remove("wrong");
@@ -83,27 +93,35 @@ const Quiz = () => {
   };
 
   const restart = () => {
+    const newShuffledData = shuffleArray(allQuestions).slice(0, 10);
     setIndex(0);
     setDisplayIndex(1);
-    setQuestion(shuffledData[0]);
+    setQuestion(newShuffledData[0]);
     setScore(0);
     setLock(false);
     setResult(false);
     setQuestionHistory([0]);
+    setShowUsernamePopup(true);
+    setUsername("");
   };
 
   return (
     <div className="container">
+      {alertType === "success" && <SuccessAlert />}
+      {alertType === "warning" && <WarningAlert />}
+      {alertType === "fail" && <FailAlert />}
       {showUsernamePopup && (
-        <div className="username-popup flex flex-col items-center justify-center">
+        <div className="username-popup">
           <h2 className="text-center mb-4">Enter Your Username</h2>
           <input
-            className="usernameDex mb-10 p-2 border border-gray-300 rounded"
+            className="usernameDex"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <button onClick={handleStartQuiz} className="bg-blue-500 mt-3 text-white p-2 rounded">Start Quiz</button>
+          <button onClick={handleStartQuiz} className="bg-blue-500 mt-3 text-white p-2 rounded">
+            Start Quiz
+          </button>
         </div>
       )}
       {!showUsernamePopup && (
@@ -156,13 +174,16 @@ const Quiz = () => {
             </>
           ) : (
             <>
+              {score < 6 ? <FailAlert /> : <PassAlert />}
               <h2>
-                 {username ? `${username}, you scored ${score} out of ${shuffledData.length}` : `You scored ${score} out of ${shuffledData.length}`}
+                {username ? `${username}, you scored ${score} out of ${shuffledData.length}` : `You scored ${score} out of ${shuffledData.length}`}
               </h2>
-              <button onClick={restart}>Restart</button>
-              <Link to="/">
-                <button>Home</button>
-              </Link>
+              <div className="button-container">
+                <button onClick={restart}>Restart</button>
+                <Link to="/">
+                  <button>Home</button>
+                </Link>
+              </div>
             </>
           )}
         </>

@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Card({ image, title, description, onClick }) {
+function Card({ image, title, description, onClick, theme }) {
   return (
-    <div className="card shadow-lg rounded-lg overflow-hidden max-w-xs mx-4 my-2 cursor-pointer bg-customRed" onClick={onClick}>
-      {typeof image === 'string' ? (
+    <div className={`card shadow-lg rounded-lg overflow-hidden max-w-xs mx-4 my-2 cursor-pointer ${theme === 'light' ? 'bg-customRed' : 'bg-costumBlue'}`} onClick={onClick}>
+      {typeof image === 'string' ? ( 
         <img className="w-full h-auto" src={image} alt={title} />
       ) : (
         <div className="relative overflow-hidden" style={{ paddingBottom: '56.25%' }}>
