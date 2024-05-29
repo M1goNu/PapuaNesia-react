@@ -38,18 +38,18 @@ function App() {
         <Navbar theme={theme} toggleTheme={toggleTheme} />
         <Routes>
           <Route path="/" element={<Home theme={theme} toggleTheme={toggleTheme} />} />
-          <Route path="/papuaPegunungan" element={<PapuaPegunungan />} />
-          <Route path="/papuaSelatan" element={<PapuaSelatan />} />
-          <Route path="/papuaTengah" element={<PapuaTengah />} />
-          <Route path="/papua" element={<Papua />} />
-          <Route path="/papuaBarat" element={<PapuaBarat />} />
-          <Route path="/papuaDaya" element={<PapuaDaya />} />
-          <Route path="/Trivia" element={<Trivia />} />
-          <Route path="/Us" element={<AboutUs />} />
+          <Route path="/papuaPegunungan" element={<PapuaPegunungan theme={theme}/>} />
+          <Route path="/papuaSelatan" element={<PapuaSelatan theme={theme}/>} />
+          <Route path="/papuaTengah" element={<PapuaTengah theme={theme}/>} />
+          <Route path="/papua" element={<Papua theme={theme}/>} />
+          <Route path="/papuaBarat" element={<PapuaBarat theme={theme}/>} />
+          <Route path="/papuaDaya" element={<PapuaDaya theme={theme}/>} />
+          <Route path="/Trivia" element={<Trivia theme={theme}/>} />
+          <Route path="/Us" element={<AboutUs theme={theme}/>} />
           <Route path="/news" element={<News theme={theme}/>} />
-          <Route path="/NewsPage" element={<NewsPage />} />
-          <Route path="/seni" element={<Seni />} />
-          <Route path="/pahlawan" element={<Pahlawan />} />
+          <Route path="/NewsPage" element={<NewsPage theme={theme}/>} />
+          <Route path="/seni" element={<Seni theme={theme}/>} />
+          <Route path="/pahlawan" element={<Pahlawan theme={theme}/>} />
         </Routes>
         <Footer theme={theme}/>
       </div>

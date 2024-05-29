@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function Papua() {
+function Papua({theme}) {
   const [content, setContent] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
@@ -78,10 +78,10 @@ function Papua() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className={`flex flex-col min-h-screen ${theme === 'light' ? 'bg-customWhite' : 'bg-customBlack'}`}>
       <div className="flex-grow p-4">
-        <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg relative">
-          <Link to="/" className="absolute left-0 text-gray-700 text-xl font-bold hover:text-customRed transition-colors duration-300 p-4">
+        <div className={`max-w-4xl mx-auto p-6 rounded-lg shadow-lg relative ${theme === 'light' ? 'bg-customRed text-customWhite' : 'bg-costumBlue text-customWhite'}`}>
+          <Link to="/" className={`absolute left-0  text-xl font-bold hover:text-customRed transition-colors duration-300 p-4 ${theme === 'light' ? 'hover:text-customRed' : 'text-customWhite hover:text-customRed'}`}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 0 1 0 12h-3" />
             </svg>
@@ -96,27 +96,27 @@ function Papua() {
                   <img src={image} alt="Papua" className="w-auto h-auto mb-4 rounded-lg" />
                 </div>
               )}
-              <h2 className="text-xl font-semibold mb-2">{description}</h2>
-              <p className="text-gray-700 mb-4">{content}</p>
+              <h2 className="text-3xl font-bold mb-2 text-center">{description}</h2>
+              <p className="mb-4">{content}</p>
               
               {history && (
-                <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                  <h2 className="text-xl font-semibold mb-2">Sejarah</h2>
-                  <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: history }} />
+                <div className="rounded-lg shadow-lg p-6 mb-8">
+                  <h2 className="text-3xl font-bold mb-2 text-center">Sejarah</h2>
+                  <div className="mb-4" dangerouslySetInnerHTML={{ __html: history }} />
                 </div>
               )}
               
               {culture && (
-                <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                  <h2 className="text-xl font-semibold mb-2">Kebudayaan</h2>
-                  <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
+                <div className="rounded-lg shadow-lg p-6 mb-8">
+                  <h2 className="text-3xl font-bold mb-2 text-center">Kebudayaan</h2>
+                  <div className="mb-4" dangerouslySetInnerHTML={{ __html: culture }} />
                 </div>
               )}
 
               {tourism && (
-                <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                  <h2 className="text-xl font-semibold mb-2">Pariwisata</h2>
-                  <div className="text-gray-700" dangerouslySetInnerHTML={{ __html: tourism }} />
+                <div className="rounded-lg shadow-lg p-6 mb-8">
+                  <h2 className="text-3xl font-bold mb-2 text-center">Pariwisata</h2>
+                  <div dangerouslySetInnerHTML={{ __html: tourism }} />
                 </div>
               )}
             </>

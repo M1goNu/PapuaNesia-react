@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = ({ theme }) => {
   return (
-    <footer className={`footer footer-center p-10 rounded ${theme === 'light' ? 'bg-customRed text-customWhite' : 'bg-costumBlue text-customWhite'}`}>
+    <footer className={`footer footer-center p-10 rounded ${theme === 'light' ? 'bg-customRed text-blackNav' : 'bg-costumBlue text-customWhite'}`}>
       <nav>
         <div className="grid grid-flow-col gap-4">
           <a

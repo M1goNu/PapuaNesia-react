@@ -13,6 +13,7 @@ const navigation = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
+
 export default function Navbar({ theme, toggleTheme }) {
   return (
     <Disclosure as="nav">
@@ -46,7 +47,8 @@ export default function Navbar({ theme, toggleTheme }) {
                         key={item.name}
                         to={item.href}
                         className={classNames(
-                          'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          theme === 'light' ? 'text-blackNav' : 'text-customWhite',
+                          'hover:bg-gray-700 hover:text-white',
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                       >
@@ -66,23 +68,24 @@ export default function Navbar({ theme, toggleTheme }) {
             </div>
           </div>
           <Disclosure.Panel className="sm:hidden">
-              <div className="px-2 pt-2 pb-3 space-y-1">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={classNames(
-                      'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'block px-3 py-2 rounded-md text-base font-medium'
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            </Disclosure.Panel>
-          </>
-        )}
-      </Disclosure>
-    );
-  }
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={classNames(
+                    theme === 'light' ? 'text-customBlack' : 'text-customWhite', 
+                    'hover:bg-gray-700 hover:text-white',
+                    'block px-3 py-2 rounded-md text-base font-medium'
+                  )}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
+  );
+}

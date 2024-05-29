@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const slides = [
-  "Gambar/baru.jpg",
-  "Gambar/map.jpg",
-  "Gambar/2.jpg",
-  "Gambar/papua1.jpg"
+  "Gambar/slider1.png",
+  "Gambar/slider2.png",
+  "Gambar/slider3.png",
+  "Gambar/slider4.png",
 ];
 
 function Map() {
