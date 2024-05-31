@@ -96,7 +96,7 @@ function PapuaTengah({ theme }) {
                   <img src={image} alt="Papua Tengah" className="w-auto h-auto mb-4 rounded-lg" />
                 </div>
               )}
-              <h2 className="text-xl font-semibold mb-2">{description}</h2>
+              <h2 className="text-3xl font-bold mb-2 text-center">{description}</h2>
               <p className="mb-4">{content}</p>
 
               {history && (
